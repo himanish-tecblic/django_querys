@@ -20,6 +20,13 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.userData, name='home')
+    path('username', views.userData, name='name'),
+    path('delivered', views.isDelivered, name='Delivered'),
+    path('dispatched', views.Dispatched, name='Dispatched'),
+    path('paymethod', views.PaymentMethod, name='paymethod'),
+    path('noPayment', views.leftpayment, name='noPayment'),
+    path('total', views.totalSell, name='total'),
+    
+
     
 ]
