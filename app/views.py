@@ -51,14 +51,7 @@ def totalSell(request):
     e_name = OrderItem.objects.get(product__name = "A200").product
     f = int(OrderItem.objects.get(product__name = "A321").price)
     f_name = OrderItem.objects.get(product__name = "A321").product
-    
-    
-    
-    
-    
-    x = 34580/10 * 6#target
-    
-    print("----->>>target", x)
+
     
     lis = [a,b,c,d,e,f]
     print("----->>>", max(lis))
@@ -69,15 +62,12 @@ def totalSell(request):
     m = OrderItem.objects.filter(price = y).values()
     print("------>>>>>>",m)
 
-    # for i in lis :
-        
-    #     # diff = (i - x)
-    #     # if Small_diff is None or diff < Small_diff:
-    #     #     Small_diff = diff
-    #     #     col = i
-    #     # print("-------->>>", col)
-    #     pass
-            
-    l = [{str(a_name) : a}, {str(b_name) : b}, {str(c_name) : c}, {str(d_name) : d}, {str(e_name) : e}, {str(f_name) : f}]
-    print("--------->>>>", l)
     return JsonResponse(list(m), safe=False)
+
+
+
+def cancelCount(request):
+    request.method = 'GET'
+    prod = Product.objects.filter(cancalCount__gt = 4)
+    
+    return JsonResponse({"data":list(prod.values())}, safe=False)

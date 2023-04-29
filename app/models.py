@@ -15,6 +15,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=13, decimal_places=2, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
+    cancalCount = models.IntegerField(null=True, blank=True, default=0)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
