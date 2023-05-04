@@ -16,6 +16,18 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 def userData(request):
     request.method = "GET"
     user_name = User.objects.all().values()
+    if cache.get('name'):
+        payload = cache.get('name')
+        print(cache.ttl('name'))
+    else:
+        a = User.objects.all()
+        
+        payload = []
+        for obj in a:
+            payload.append(obj.first_name)
+            
+        cache.set('name',payload, timeout=10)
+        
     return JsonResponse(list(user_name),safe=False)
 
 
