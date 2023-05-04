@@ -27,5 +27,6 @@ urlpatterns = [
     path('noPayment', views.leftpayment, name='noPayment'),
     path('total', views.totalSell, name='total'),
     path('cancel_count', views.cancelCount, name='cancel_count'),
+    path('get_fruits', views.getfruits)
     
 ]

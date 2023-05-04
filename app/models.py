@@ -50,3 +50,9 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.product)
+    
+
+class fruits(models.Model):
+    fruits_name = models.CharField(max_length=100)
+    def __str__(self):
+        return str(self.fruits_name)

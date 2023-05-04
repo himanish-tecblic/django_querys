@@ -4,8 +4,14 @@ from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 import json
 from django.db.models import Sum
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from django.conf import settings
 
 # Create your views here.
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 def userData(request):
     request.method = "GET"
@@ -71,3 +77,21 @@ def cancelCount(request):
     prod = Product.objects.filter(cancalCount__gt = 4)
     
     return JsonResponse({"data":list(prod.values())}, safe=False)
+
+
+def getfruits(request):
+    
+    if cache.get('fruits'):
+        payload = cache.get('fruits')
+        print(cache.ttl('fruits'))
+    else:
+        
+        objs = fruits.objects.all()
+        
+        payload = []
+        for obj in objs:
+            payload.append(obj.fruits_name)
+            
+        cache.set('fruits',payload, timeout=10)
+        
+    return JsonResponse({'data' : payload})
